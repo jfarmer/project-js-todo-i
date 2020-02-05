@@ -22,8 +22,8 @@ let file = process.argv[2]
 
 function printList(file) {
   let text = fs.readFileSync(file, 'utf-8').split("\n")
-  for (let i = 1; i < text.length - 1; i++ ) {
-    console.log(`${i}. ${text[i]}`)
+  for (let i = 0; i < text.length - 1; i++ ) {
+    console.log(`${i + 1}. ${text[i]}`)
   }
 
 }
