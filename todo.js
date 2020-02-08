@@ -1,4 +1,5 @@
 let fs = require('fs');
+let process = require('process');
 
 function newTask(description) {
   return {
@@ -29,6 +30,16 @@ function showList(list) {
   }
 }
 
+let command = process.argv[2];
+if (command === undefined) {
+  console.log('Please supply todo.js with a command');
+  process.exit(1);
+}
+
 let todoList = newTodoListFromFile('./todos.txt');
 
-showList(todoList);
+if (command === 'list') {
+  showList(todoList);
+} else {
+  console.log(`Unknown command: ${command}`);
+}
