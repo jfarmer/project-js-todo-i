@@ -31,10 +31,24 @@ function newTodoListFromFile(fileName) {
   let lines = fs.readFileSync(fileName, 'utf-8').trimRight().split('\n');
 
   for (let line of lines) {
-    addTask(list, newTask(line));
+    addTask(list, newTaskFromTodoFileLine(line));
   }
 
   return list;
+}
+
+function newTaskFromTodoFileLine(line) {
+  let taskRegex = /\[([ X])\]\s*(.*)/;
+  let matchData = line.match(taskRegex);
+
+  if (matchData === null) {
+    // TODO: Handle the case where the line in todos.txt is malformed
+  }
+
+  let description = matchData[2];
+  let isComplete = matchData[1] === 'X';
+
+  return newTask(description, isComplete);
 }
 
 function saveTodoListToFile(fileName, list) {
@@ -51,7 +65,13 @@ function saveTodoListToFile(fileName, list) {
 
 function showList(list) {
   for (let i = 0; i < list.length; i++) {
-    console.log(`${i + 1}. ${list[i].description}`);
+    let markChar = ' ';
+
+    if (list[i].isComplete) {
+      markChar = 'X';
+    }
+
+    console.log(`${i + 1}. [${markChar}] ${list[i].description}`);
   }
 }
 
