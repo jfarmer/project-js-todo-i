@@ -13,6 +13,12 @@ function addTask(list, task) {
   return list;
 }
 
+function removeTask(list, index) {
+  list.splice(index, 1);
+
+  return list;
+}
+
 function newTodoListFromFile(fileName) {
   let list = [];
   let lines = fs.readFileSync(fileName, 'utf-8').trimRight().split('\n');
@@ -67,6 +73,12 @@ if (command === 'list' || command === 'show') {
   let task = newTask(description);
 
   addTask(todoList, task);
+
+  saveTodoListToFile(TODO_FILE, todoList);
+} else if (command === 'remove') {
+  let positionArg = Number(process.argv[3]);
+
+  removeTask(todoList, position - 1);
 
   saveTodoListToFile(TODO_FILE, todoList);
 } else {
