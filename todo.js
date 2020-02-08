@@ -65,7 +65,7 @@ function saveTodoListToFile(fileName, list) {
   let lines = [];
 
   for (let task of list) {
-    lines.push(task.description);
+    lines.push(formatTaskForDisplay(task));
   }
 
   let content = lines.join('\n');
@@ -136,6 +136,8 @@ if (command === 'list' || command === 'show') {
   if (task.isComplete) {
     console.log(`Marked '${task.description}' as complete.`);
   }
+
+  saveTodoListToFile(TODO_FILE, todoList);
 } else {
   console.log(`Unknown command: ${command}`);
 }
