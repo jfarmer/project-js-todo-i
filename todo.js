@@ -40,6 +40,21 @@ let todoList = newTodoListFromFile('./todos.txt');
 
 if (command === 'list' || command === 'show') {
   showList(todoList);
+} else if (command === 'add') {
+  let description = process.argv[3];
+
+  if (description === undefined) {
+    console.log('Please supply a task description.');
+    console.log('Example:');
+    console.log('  node tood.js add "Walk the dog"');
+    process.exit(1);
+  }
+
+  let task = newTask(description);
+
+  addTask(todoList, task);
+
+  showList(todoList);
 } else {
   console.log(`Unknown command: ${command}`);
 }
