@@ -20,6 +20,12 @@ function markTaskIncomplete(task) {
   return task;
 }
 
+function toggleTaskComplete(task) {
+  task.isComplete = !task.isComplete;
+
+  return task;
+}
+
 function addTask(list, task) {
   list.push(task);
 
@@ -152,6 +158,20 @@ if (command === 'list' || command === 'show') {
   markTaskIncomplete(task);
 
   if (!task.isComplete) {
+    console.log(`Marked '${task.description}' as incomplete.`);
+  }
+
+  saveTodoListToFile(TODO_FILE, todoList);
+} else if (command === 'toggle') {
+  let position = exitIfInvalidPosition(process.argv[3]);
+
+  let task = todoList[position - 1];
+
+  toggleTaskComplete(task);
+
+  if (task.isComplete) {
+    console.log(`Marked '${task.description}' as complete.`);
+  } else {
     console.log(`Marked '${task.description}' as incomplete.`);
   }
 
