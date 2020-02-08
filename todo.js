@@ -23,6 +23,12 @@ function newTodoListFromFile(fileName) {
   return list;
 }
 
+function showList(list) {
+  for (let i = 0; i < list.length; i++) {
+    console.log(`${i + 1}. ${list[i].description}`);
+  }
+}
+
 let todoList = newTodoListFromFile('./todos.txt');
 
-console.log(todoList);
+showList(todoList);
