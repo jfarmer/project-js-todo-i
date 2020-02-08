@@ -38,7 +38,7 @@ if (command === undefined) {
 
 let todoList = newTodoListFromFile('./todos.txt');
 
-if (command === 'list') {
+if (command === 'list' || command === 'show') {
   showList(todoList);
 } else {
   console.log(`Unknown command: ${command}`);
