@@ -102,6 +102,16 @@ if (command === 'list' || command === 'show') {
   removeTask(todoList, position - 1);
 
   saveTodoListToFile(TODO_FILE, todoList);
+} else if (command === 'complete') {
+  let position = exitIfInvalidPosition(process.argv[3]);
+
+  let task = todoList[position - 1];
+
+  markTaskComplete(task);
+
+  if (task.isComplete) {
+    console.log(`Marked '${task.description}' as complete.`);
+  }
 } else {
   console.log(`Unknown command: ${command}`);
 }
