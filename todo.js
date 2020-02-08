@@ -46,7 +46,7 @@ if (command === 'list' || command === 'show') {
   if (description === undefined) {
     console.log('Please supply a task description.');
     console.log('Example:');
-    console.log('  node tood.js add "Walk the dog"');
+    console.log('  node todo.js add "Walk the dog"');
     process.exit(1);
   }
 
