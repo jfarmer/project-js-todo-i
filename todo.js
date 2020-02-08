@@ -1,11 +1,18 @@
 let fs = require('fs');
 let process = require('process');
 
-function newTask(description) {
+function newTask(description, isComplete) {
   return {
     description: description,
+    isComplete: isComplete,
   };
 };
+
+function markTaskComplete(task) {
+  task.isComplete = true;
+
+  return task;
+}
 
 function addTask(list, task) {
   list.push(task);
