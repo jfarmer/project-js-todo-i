@@ -26,6 +26,16 @@ function removeTask(list, index) {
   return list;
 }
 
+function formatTaskForDisplay(task) {
+  let markChar = ' ';
+
+  if (task.isComplete) {
+    markChar = 'X';
+  }
+
+  return `[${markChar}] ${task.description}`;
+}
+
 function newTodoListFromFile(fileName) {
   let list = [];
   let lines = fs.readFileSync(fileName, 'utf-8').trimRight().split('\n');
@@ -65,13 +75,7 @@ function saveTodoListToFile(fileName, list) {
 
 function showList(list) {
   for (let i = 0; i < list.length; i++) {
-    let markChar = ' ';
-
-    if (list[i].isComplete) {
-      markChar = 'X';
-    }
-
-    console.log(`${i + 1}. [${markChar}] ${list[i].description}`);
+    console.log(`${i + 1}. ${formatTaskForDisplay(list[i])}`);
   }
 }
 
