@@ -76,7 +76,12 @@ if (command === 'list' || command === 'show') {
 
   saveTodoListToFile(TODO_FILE, todoList);
 } else if (command === 'remove') {
-  let positionArg = Number(process.argv[3]);
+  let position = Number(process.argv[3]);
+
+  if (!Number.isInteger(position) || position > todoList.length) {
+    console.log(`Error: Invalid position, received '${position}'`);
+    process.exit(1);
+  }
 
   removeTask(todoList, position - 1);
 
