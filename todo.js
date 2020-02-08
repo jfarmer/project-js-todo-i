@@ -1,3 +1,5 @@
+let fs = require('fs');
+
 function newTask(description) {
   return {
     description: description,
@@ -10,12 +12,17 @@ function addTask(list, task) {
   return list;
 }
 
-let todoList = [
-  newTask('Walk the dog'),
-  newTask('Bake a cake'),
-  newTask('Wash the car'),
-];
+function newTodoListFromFile(fileName) {
+  let list = [];
+  let lines = fs.readFileSync(fileName, 'utf-8').trimRight().split('\n');
 
-addTask(todoList, newTask('Write a song'));
+  for (let line of lines) {
+    addTask(list, newTask(line));
+  }
+
+  return list;
+}
+
+let todoList = newTodoListFromFile('./todos.txt');
 
 console.log(todoList);
