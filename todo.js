@@ -24,6 +24,18 @@ function newTodoListFromFile(fileName) {
   return list;
 }
 
+function saveTodoListToFile(fileName, list) {
+  let lines = [];
+
+  for (let task of list) {
+    lines.push(task.description);
+  }
+
+  let content = lines.join('\n');
+
+  fs.writeFileSync(fileName, content);
+}
+
 function showList(list) {
   for (let i = 0; i < list.length; i++) {
     console.log(`${i + 1}. ${list[i].description}`);
@@ -36,7 +48,9 @@ if (command === undefined) {
   process.exit(1);
 }
 
-let todoList = newTodoListFromFile('./todos.txt');
+let TODO_FILE = './todos.txt'
+
+let todoList = newTodoListFromFile(TODO_FILE);
 
 if (command === 'list' || command === 'show') {
   showList(todoList);
@@ -54,7 +68,7 @@ if (command === 'list' || command === 'show') {
 
   addTask(todoList, task);
 
-  showList(todoList);
+  saveTodoListToFile(TODO_FILE, todoList);
 } else {
   console.log(`Unknown command: ${command}`);
 }
