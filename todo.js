@@ -55,6 +55,20 @@ function showList(list) {
   }
 }
 
+function exitIfInvalidPosition(positionArg) {
+  let position = Number(positionArg);
+
+  if (!Number.isInteger(position)) {
+    console.log(`Error: Expected task position, received '${positionArg}'`);
+    return process.exit(1);
+  } else if (position > todoList.length) {
+    console.log(`Error: No task a position ${position}, only ${todoList.length} tasks on list`);
+    return process.exit(1);
+  }
+
+  return position;
+}
+
 let command = process.argv[2];
 if (command === undefined) {
   console.log('Please supply todo.js with a command');
@@ -83,16 +97,7 @@ if (command === 'list' || command === 'show') {
 
   saveTodoListToFile(TODO_FILE, todoList);
 } else if (command === 'remove') {
-  let positionArg = process.argv[3];
-  let position = Number(positionArg);
-
-  if (!Number.isInteger(position)) {
-    console.log(`Error: Expected task position, received '${positionArg}'`);
-    process.exit(1);
-  } else if (position > todoList.length) {
-    console.log(`Error: No task a position ${position}, only ${todoList.length} tasks on list`);
-    process.exit(1);
-  }
+  let position = exitIfInvalidPosition(process.argv[3]);
 
   removeTask(todoList, position - 1);
 
