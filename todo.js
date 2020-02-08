@@ -14,6 +14,12 @@ function markTaskComplete(task) {
   return task;
 }
 
+function markTaskIncomplete(task) {
+  task.isComplete = false;
+
+  return task;
+}
+
 function addTask(list, task) {
   list.push(task);
 
@@ -135,6 +141,18 @@ if (command === 'list' || command === 'show') {
 
   if (task.isComplete) {
     console.log(`Marked '${task.description}' as complete.`);
+  }
+
+  saveTodoListToFile(TODO_FILE, todoList);
+} else if (command === 'incomplete') {
+  let position = exitIfInvalidPosition(process.argv[3]);
+
+  let task = todoList[position - 1];
+
+  markTaskIncomplete(task);
+
+  if (!task.isComplete) {
+    console.log(`Marked '${task.description}' as incomplete.`);
   }
 
   saveTodoListToFile(TODO_FILE, todoList);
