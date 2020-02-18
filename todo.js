@@ -111,7 +111,7 @@ if (command === undefined) {
   process.exit(1);
 }
 
-let TODO_FILE = './todos.txt'
+let TODO_FILE = './todos.txt';
 
 let todoList = newTodoListFromFile(TODO_FILE);
 
