@@ -15,3 +15,39 @@ Keep the responsibilities separated as best you can:
 4. Displaying information to the user
 5. Rather user input and taking the appropriate actions
 */
+const fs = require('fs');
+let todoList = fs.readFileSync("todos.txt","utf-8");
+let command = process.argv[2];
+let readLineSync = require("readLine-sync");
+let TODO = {};
+function list() {
+
+  if (command === "list")
+  {
+    console.log(todoList);
+  }
+}
+list();
+function append() {
+  if (command === "append")
+  {
+    let newTask = readLineSync.question("What would you like to add?");
+    console.log(todoList + newTask);
+  }
+}
+append();
+function delete() {
+  if (command === "delete")
+  {
+    let deleteTask = readLineSync.question("What would you like to delete?");
+    if (todoList.includes(deleteTask)) {
+      for (let i =0;i<todoList.length;i++) {
+        if (todoList[i] === deleteTask && todoList[i+1] === deleteTask[i+1]) {
+          todoList.splice(todoList[i],deleteTask.length);
+        }
+      }
+    }
+    console.log(todoList);
+  }
+}
+delete();
