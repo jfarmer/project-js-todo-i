@@ -6,8 +6,18 @@ The TODO list itself is contained in `todos.txt`. The `todo.js` file is mean to 
 
 ## Contents <!-- omit in toc -->
 
+- [Getting Started](#getting-started)
 - [Learning Goals](#learning-goals)
+  - [Reading From And Writing To Files](#reading-from-and-writing-to-files)
 - [Iterations](#iterations)
+
+## Getting Started
+
+1. Fork this repository on GitHub
+1. From the terminal, use `git clone` to create a local copy of the fork
+1. From the terminal, navigate to the project directory
+1. Run `npm install` inside the project directory (this will install required packages)
+1. Get started on the [iterations](#iterations).
 
 ## Learning Goals
 
@@ -16,6 +26,20 @@ This application has all the moving parts of an typical application: user input,
 Keep things like the [single responsibility principle](http://en.wikipedia.org/wiki/Single_responsibility_principle) and [separation of concerns](http://en.wikipedia.org/wiki/Separation_of_concerns) in mind as you decide what objects and classes belong in your application.
 
 As you work through the iterations, pay close attention to how *change* impacts your application.  When a new feature is added how many files do you have to change?  How frustrating is it to make those changes?
+
+### Reading From And Writing To Files
+
+This project involves reading from and writing to files. If you don't have much experience doing that, see the [Input/Output section][intro-js-input-output] of the JS Crash Course.
+
+There are two main functions you'll probably use:
+
+1. [fs.readFileSync][node-fs-readfilesync] to read the contents of a file into your program
+1. [fs.writeFileSync][node-fs-writefilesync] to write the contents of a variable to a particular file
+
+> **Warning!**
+> You'll probably runa cross `fs.readFile` and `fs.writeFile`. These are alternatives to `fs.readFileSync` and `fs.writeFileSync` that require a different approach to use.
+>
+> If you're not comfortable with interacting with files, `fs.readFileSync` and `fs.writeFileSync` will be easier to understand.
 
 ## Iterations
 
@@ -64,3 +88,7 @@ We suggest doing the following requirement LAST since you'll have to change how 
   3. [ ] Make dinner
   $
   ```
+
+[intro-js-input-output]: https://github.com/jfarmer/intro-javascript/tree/master/Input-Output
+[node-fs-readfilesync]: https://nodejs.dev/learn/reading-files-with-nodejs
+[node-fs-writefilesync]: https://nodejs.dev/learn/writing-files-with-nodejs
